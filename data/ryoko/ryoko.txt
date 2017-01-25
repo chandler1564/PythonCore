@@ -1,0 +1,14 @@
+9calc.py 3 ** 2
+9
+9calc.py 3 ** 2
+9
+9calc.py print
+9calc.py 3 ** 2
+9
+9calc.py 3 ** 2
+9
+
+9calc.py 7 * 9
+63
+9calc.py 7 * 94
+658
