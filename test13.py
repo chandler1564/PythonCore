@@ -7,6 +7,7 @@
 展示如何实现这些特殊的方法来自定义你的类，以让它们表现得更像Python的內建类型。
 '''
 import time
+from math import fabs
 class Devnull1(object):
     def __get__ (self, obj,type=None):
         pass
@@ -71,9 +72,57 @@ class FooFoo(object):
 '''
 
 # 13-2 函数和方法的区别
-'''
+#答：函数在声明之后可以随时调用。方法是类的属性，只能由类的实例来调用。
 
-'''
+#13-3 编写一个类，把数值转换为美元
+class MoneyFmt(object):
+    count = 0
+
+    def __init__(self, data1):
+        self.count = data1
+
+    def update(self, data1):
+        self.count = data1
+
+    def __nonzero__(self):
+        if self.count<1:
+            return False
+        else:
+            return True
+
+    def __repr__(self):
+        return float(self.count)
+
+    def __str__(self):
+        data = self.count
+        if isinstance(data, (int, long)):
+            if data < 0:
+                return '-$' + '{:,}'.format(abs(data)).split('.')[0]
+            else:
+                return '$' + '{:,}'.format(data).split('.')[0]
+        elif isinstance(data, (float)):
+            if data < 0:
+                return '-$' + '{:,}'.format(abs(data)).split('.')[0] + '.' + '{:,}'.format(abs(data)).split('.')[1][0:2]
+            else:
+                return '$' + '{:,}'.format(data).split('.')[0] + '.' + '{:,}'.format(data).split('.')[1][0:2]
+        else:
+            return '$0'
+
+#13-4 用户数据类，登录名，密码，上次登录时间
+#代码在13userpw.py中
+
+#13-5 坐标点类
+class Point(object):
+    x=0
+    y=0
+    def __init__(self,x1=0,y1=0):
+        x=x1
+        y=y1
+
+# p=Point(1,3)
+# print p.x,p.y
+
+#13-6
 
 
 
@@ -86,3 +135,22 @@ class FooFoo(object):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+# if __name__=='__main__':
+#     itd = MoneyFmt(25.36)
+#     itd.update(222222.36)
+#     print itd.__str__(),itd.__nonzero__(),itd.__repr__()
